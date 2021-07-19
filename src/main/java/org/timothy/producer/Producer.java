@@ -27,7 +27,7 @@ public class Producer {
 
         logger.info("Start sending messages...");
         for (int i = 1; i <= AppConfigs.numEvents; i++) {
-            producer.send(new ProducerRecord<>(AppConfigs.topicName, i, "This is message-" + i));
+            producer.send(new ProducerRecord<>(AppConfigs.topicName, i, "Message" + i + "is here."));
         }
 
         logger.info("Finished - Closing Kafka Producer.");
