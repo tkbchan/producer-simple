@@ -26,8 +26,10 @@ public class Producer {
         KafkaProducer<Integer, String> producer = new KafkaProducer<>(props);
 
         logger.info("Start sending messages...");
+        producer.send(new ProducerRecord<>(AppConfigs.topicName, "You've subscribed to spam messages"));
+
         for (int i = 1; i <= AppConfigs.numEvents; i++) {
-            producer.send(new ProducerRecord<>(AppConfigs.topicName, i, "Message" + i + "is here."));
+            producer.send(new ProducerRecord<>(AppConfigs.topicName, i, "Message " + i + " is here."));
         }
 
         logger.info("Finished - Closing Kafka Producer.");
