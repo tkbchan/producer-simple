@@ -1,9 +1,7 @@
 package org.timothy.producer;
 
+import org.apache.kafka.clients.producer.*;
 import org.timothy.producer.common.AppConfigs;
-import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.ProducerConfig;
-import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.IntegerSerializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.apache.logging.log4j.LogManager;
@@ -26,13 +24,22 @@ public class Producer {
         KafkaProducer<Integer, String> producer = new KafkaProducer<>(props);
 
         logger.info("Start sending messages...");
-        producer.send(new ProducerRecord<>(AppConfigs.topicName, "You've subscribed to spam messages"));
 
         for (int i = 1; i <= AppConfigs.numEvents; i++) {
-            producer.send(new ProducerRecord<>(AppConfigs.topicName, i, "Message " + i + " is here."));
+            producer.send(new ProducerRecord<>(AppConfigs.topicName, i, "Message " + i + " Test"), new Callback() {
+                @Override
+                public void onCompletion(RecordMetadata recordMetadata, Exception e) {
+                    if(e == null){
+                        logger.info("\nReceived metadata" + " Topic:" + recordMetadata.topic() + " Partition: " + recordMetadata.partition() + " Offset: " + recordMetadata.offset() + " Time: " + recordMetadata.timestamp() + "\n");
+                    } else {
+                        logger.error("Error", e);
+                    }
+                }
+            });
         }
 
         logger.info("Finished - Closing Kafka Producer.");
+        producer.flush();
         producer.close();
 
     }
