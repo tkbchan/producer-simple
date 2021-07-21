@@ -30,7 +30,7 @@ public class Consumer {
 
         KafkaConsumer<Integer, String> consumer = new KafkaConsumer<>(p);
 
-        consumer.subscribe(Arrays.asList("producer-simple"));
+        consumer.subscribe(Arrays.asList("first-topic"));
 
         while(true){
             ConsumerRecords<Integer,String> records = consumer.poll(Duration.ofMillis(1000));
