@@ -1,26 +1,28 @@
 package org.timothy.producer;
 
 import org.apache.kafka.clients.producer.*;
-import org.timothy.producer.common.AppConfigs;
 import org.apache.kafka.common.serialization.IntegerSerializer;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.timothy.producer.common.AppConfigs;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+
 import java.util.Properties;
 
-public class Producer {
+public class Producer{
+
     private static final Logger logger = LogManager.getLogger(Producer.class);
-
     public static void main(String[] args) {
-
         logger.info("Creating Kafka Producer...");
         Properties props = new Properties();
-        props.put(ProducerConfig.CLIENT_ID_CONFIG, AppConfigs.applicationID);
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, AppConfigs.bootstrapServers);
-        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, IntegerSerializer.class.getName());
-        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-        props.put(ProducerConfig.ACKS_CONFIG, "all");
+        props.setProperty(ProducerConfig.CLIENT_ID_CONFIG, AppConfigs.applicationID);
+        props.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, AppConfigs.bootstrapServers);
+        props.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, IntegerSerializer.class.getName());
+        props.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        props.setProperty(ProducerConfig.ACKS_CONFIG, "all");
+        props.setProperty(ProducerConfig.RETRIES_CONFIG, "3");
+        props.setProperty(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, "5");
 
         KafkaProducer<Integer, String> producer = new KafkaProducer<>(props);
 
