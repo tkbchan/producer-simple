@@ -6,6 +6,7 @@ import org.apache.kafka.common.serialization.StringSerializer;
 import org.timothy.producer.common.AppConfigs;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.timothy.producer.common.PropConfigs;
 
 
 import java.util.Properties;
@@ -15,6 +16,8 @@ public class Producer{
     private static final Logger logger = LogManager.getLogger(Producer.class);
     public static void main(String[] args) {
         logger.info("Creating Kafka Producer...");
+        PropConfigs p = new PropConfigs();
+        p.ProdProps();
         Properties props = new Properties();
         props.setProperty(ProducerConfig.CLIENT_ID_CONFIG, AppConfigs.applicationID);
         props.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, AppConfigs.bootstrapServers);
