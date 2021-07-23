@@ -1,5 +1,6 @@
 package org.timothy.producer;
 
+
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -14,23 +15,21 @@ import java.time.Duration;
 import java.util.Arrays;
 import java.util.Properties;
 
-public class Consumer {
+
+public class Consumer{
+
     private static final Logger logger = LogManager.getLogger(Consumer.class);
-
     public static void main(String[] args) {
-        final String bootstrapServers = AppConfigs.bootstrapServers;
-        final String consumerGroupID = AppConfigs.consumerGroupID;
+        Properties props = new Properties();
+        props.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, AppConfigs.bootstrapServers);
+        props.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, IntegerDeserializer.class.getName());
+        props.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+        props.setProperty(ConsumerConfig.GROUP_ID_CONFIG, AppConfigs.consumerGroupID);
+        props.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 
-        Properties p = new Properties();
-        p.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-        p.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, IntegerDeserializer.class.getName());
-        p.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
-        p.setProperty(ConsumerConfig.GROUP_ID_CONFIG, consumerGroupID);
-        p.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+        KafkaConsumer<Integer, String> consumer = new KafkaConsumer<>(props);
 
-        KafkaConsumer<Integer, String> consumer = new KafkaConsumer<>(p);
-
-        consumer.subscribe(Arrays.asList("producer-simple"));
+        consumer.subscribe(Arrays.asList("test-topic"));
 
         while(true){
             ConsumerRecords<Integer,String> records = consumer.poll(Duration.ofMillis(1000));
