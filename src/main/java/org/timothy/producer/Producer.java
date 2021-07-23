@@ -1,15 +1,10 @@
 package org.timothy.producer;
 
 import org.apache.kafka.clients.producer.*;
-import org.apache.kafka.common.serialization.IntegerSerializer;
-import org.apache.kafka.common.serialization.StringSerializer;
 import org.timothy.producer.common.AppConfigs;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.timothy.producer.common.PropConfigs;
-
-
-import java.util.Properties;
 
 public class Producer{
 
