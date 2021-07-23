@@ -17,12 +17,12 @@ public class Producer{
     public static void main(String[] args) {
         logger.info("Creating Kafka Producer...");
 
-        KafkaProducer<Integer, String> producer = new KafkaProducer<>(PropConfigs.prodProps());
+        KafkaProducer<Integer, String> producer = PropConfigs.prodProps();
 
         logger.info("Start sending messages...");
 
         for (int i = 1; i <= AppConfigs.numEvents; i++) {
-            producer.send(new ProducerRecord<>(AppConfigs.topicName, i, "Message " + i + " Test"), new Callback() {
+            producer.send(new ProducerRecord<>(AppConfigs.topicName, i, "Test " + i + " Message"), new Callback() {
                 @Override
                 public void onCompletion(RecordMetadata recordMetadata, Exception e) {
                     if(e == null){
