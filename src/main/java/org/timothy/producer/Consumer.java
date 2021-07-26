@@ -18,10 +18,20 @@ public class Consumer{
         KafkaConsumer<Integer, String> consumer = PropConfigs.consProps();
 
         consumer.subscribe(Collections.singleton(AppConfigs.topicName));
+        int noMessageFound = 0;
 
         while(true){
             ConsumerRecords<Integer,String> records = consumer.poll(Duration.ofMillis(1000));
-            for(ConsumerRecord record: records){
+
+            if (records.count() == 0) {
+                noMessageFound++;
+                if (noMessageFound > AppConfigs.MAX_NO_MESSAGE_FOUND_COUNT)
+                    break;
+                else
+                    continue;
+            }
+
+            records.forEach(record -> {
                 logger.info("Received new record: " +
                         " Key: " + record.key() +
                         ", Value: " + record.value() +
@@ -29,7 +39,7 @@ public class Consumer{
                         ", Partition: " + record.partition() +
                         ", Offset: " + record.offset() + "\n"
                 );
-            }
+            });
             consumer.commitAsync();
 
         }
