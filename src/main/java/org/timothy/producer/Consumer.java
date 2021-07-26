@@ -31,6 +31,7 @@ public class Consumer{
                         ", Offset: " + record.offset() + "\n"
                 );
             }
+            consumer.commitAsync();
 
         }
 
