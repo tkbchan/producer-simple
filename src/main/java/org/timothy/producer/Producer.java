@@ -13,7 +13,6 @@ public class Producer{
     private static final Logger logger = LogManager.getLogger(Producer.class);
     public static void main(String[] args) {
         logger.info("Creating Kafka Producer...");
-
         KafkaProducer<Integer, String> producer = PropConfigs.prodProps();
 
         logger.info("Start sending messages...");

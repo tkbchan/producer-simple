@@ -15,7 +15,6 @@ public class Consumer{
 
     private static final Logger logger = LogManager.getLogger(Consumer.class);
     public static void main(String[] args) {
-
         KafkaConsumer<Integer, String> consumer = PropConfigs.consProps();
 
         consumer.subscribe(Collections.singleton(AppConfigs.topicName));
