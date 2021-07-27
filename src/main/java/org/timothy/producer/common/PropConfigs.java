@@ -22,9 +22,9 @@ public class PropConfigs {
         props.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         props.setProperty(ProducerConfig.ACKS_CONFIG, "all");
         props.setProperty(ProducerConfig.RETRIES_CONFIG, "3");
-        props.setProperty(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, "5");
-        props.setProperty(ProducerConfig.RETRY_BACKOFF_MS_CONFIG, "1000");
-        props.setProperty(ProducerConfig.REQUEST_TIMEOUT_MS_CONFIG, "5000");
+        props.setProperty(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, "1"); //to avoid out of order retries
+        props.setProperty(ProducerConfig.RETRY_BACKOFF_MS_CONFIG, "1000"); // 1 second retry back off
+        props.setProperty(ProducerConfig.REQUEST_TIMEOUT_MS_CONFIG, "5000"); //5 seconds request timeout
         return new KafkaProducer<>(props);
     }
 
