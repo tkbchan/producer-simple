@@ -1,6 +1,5 @@
 package org.timothy.producer;
 
-import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.logging.log4j.LogManager;
@@ -31,15 +30,13 @@ public class Consumer{
                     continue;
             }
 
-            records.forEach(record -> {
-                logger.info("Received new record: " +
-                        " Key: " + record.key() +
-                        ", Value: " + record.value() +
-                        ", Topic: " + record.topic() +
-                        ", Partition: " + record.partition() +
-                        ", Offset: " + record.offset() + "\n"
-                );
-            });
+            records.forEach(record -> logger.info("Received new record: " +
+                    " Key: " + record.key() +
+                    ", Value: " + record.value() +
+                    ", Topic: " + record.topic() +
+                    ", Partition: " + record.partition() +
+                    ", Offset: " + record.offset() + "\n"
+            ));
             consumer.commitAsync();
 
         }

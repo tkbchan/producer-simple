@@ -18,7 +18,7 @@ public class Producer{
         logger.info("Start sending messages...");
 
         for (int i = 1; i <= AppConfigs.numEvents; i++) {
-            ProducerRecord<Integer, String> record = new ProducerRecord<Integer, String>(AppConfigs.topicName, "This is Message: " + i);
+            ProducerRecord<Integer, String> record = new ProducerRecord<>(AppConfigs.topicName, "This is Message: " + i);
             try {
                 RecordMetadata metadata = producer.send(record).get();
                 System.out.println("Record sent with key " + i + " to partition " + metadata.partition()
@@ -26,11 +26,12 @@ public class Producer{
             }
             catch (ExecutionException e) {
                 System.out.println("Error in sending record");
-                System.out.println(e);
+                //System.out.println(e);
+                e.printStackTrace();
             }
             catch (InterruptedException e) {
                 System.out.println("Error in sending record");
-                System.out.println(e);
+                //System.out.println(e);
             }
         }
 
