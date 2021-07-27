@@ -24,7 +24,7 @@ public class PropConfigs {
         props.setProperty(ProducerConfig.RETRIES_CONFIG, "3");
         props.setProperty(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, "5");
         props.setProperty(ProducerConfig.RETRY_BACKOFF_MS_CONFIG, "1000");
-
+        props.setProperty(ProducerConfig.REQUEST_TIMEOUT_MS_CONFIG, "5000");
         return new KafkaProducer<>(props);
     }
 
