@@ -21,7 +21,7 @@ public class Consumer{
 
         while(true){
             ConsumerRecords<Integer,String> records = consumer.poll(Duration.ofMillis(1000));
-
+            
             if (records.count() == 0) {
                 noMessageFound++;
                 if (noMessageFound > AppConfigs.MAX_NO_MESSAGE_FOUND_COUNT)
