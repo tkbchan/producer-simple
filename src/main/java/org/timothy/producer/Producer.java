@@ -18,7 +18,7 @@ public class Producer{
         logger.info("Start sending messages...");
 
         for (int i = 1; i <= AppConfigs.numEvents; i++) {
-            ProducerRecord<Integer, String> record = new ProducerRecord<>(AppConfigs.topicName, "This is Message: " + i);
+            ProducerRecord<Integer, String> record = new ProducerRecord<>(AppConfigs.topicName,"This is Message: " + i);
             try {
                 RecordMetadata metadata = producer.send(record).get();
                 System.out.println("Record sent with key " + i + " to partition " + metadata.partition()
