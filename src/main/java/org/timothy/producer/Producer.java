@@ -34,10 +34,8 @@ public class Producer{
                 //System.out.println(e);
             }
         }
-
-        logger.info("Finished - Closing Kafka Producer.");
         producer.flush();
         producer.close();
-
+        logger.info("Finished - Closing Kafka Producer.");
     }
 }
