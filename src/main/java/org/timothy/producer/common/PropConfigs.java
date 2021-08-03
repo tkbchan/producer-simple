@@ -37,7 +37,9 @@ public class PropConfigs {
         props.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         props.setProperty(ConsumerConfig.GROUP_ID_CONFIG, AppConfigs.consumerGroupID);
         props.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
-        props.setProperty(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "false");
+        props.setProperty(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "true");
+        props.setProperty(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, "1000");
+        //props.setProperty(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "30000");
 
         return new KafkaConsumer<>(props);
     }
