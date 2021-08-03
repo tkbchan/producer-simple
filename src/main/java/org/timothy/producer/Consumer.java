@@ -16,7 +16,7 @@ public class Consumer{
     public static void main(String[] args) {
         KafkaConsumer<Integer, String> consumer = PropConfigs.consProps();
 
-        consumer.subscribe(Collections.singleton(AppConfigs.topicName));
+        consumer.subscribe(Collections.singletonList(AppConfigs.topicName));
         int noMessageFound = 0;
 
         while(true){
@@ -40,6 +40,6 @@ public class Consumer{
             consumer.commitAsync();
 
         }
-
+        consumer.close();
     }
 }
