@@ -13,7 +13,6 @@ import java.util.Properties;
 
 public class PropConfigs {
 
-
     public static KafkaProducer<Integer, String> prodProps(){
         Properties props = new Properties();
         props.setProperty(ProducerConfig.CLIENT_ID_CONFIG, AppConfigs.applicationID);
