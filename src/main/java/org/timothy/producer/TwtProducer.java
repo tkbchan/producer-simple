@@ -35,7 +35,7 @@ public class TwtProducer {
 
     public void run(){
         logger.info("Setting up Kafka Twitter Producer...");
-        BlockingQueue<String> msgQueue = new LinkedBlockingQueue<>(150);
+        BlockingQueue<String> msgQueue = new LinkedBlockingQueue<>(500);
         Client client = twtClient(msgQueue);
         client.connect(); //invokes the connection function
         KafkaProducer<Integer, String> producer = PropConfigs.prodProps();
