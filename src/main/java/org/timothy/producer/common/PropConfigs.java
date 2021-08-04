@@ -4,7 +4,6 @@ import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
-import org.apache.kafka.clients.producer.UniformStickyPartitioner;
 import org.apache.kafka.common.serialization.IntegerDeserializer;
 import org.apache.kafka.common.serialization.IntegerSerializer;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -13,7 +12,6 @@ import org.apache.kafka.common.serialization.StringSerializer;
 import java.util.Properties;
 
 public class PropConfigs {
-
 
     public static KafkaProducer<Integer, String> prodProps(){
         Properties props = new Properties();
@@ -39,7 +37,7 @@ public class PropConfigs {
         props.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
         props.setProperty(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "true");
         props.setProperty(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, "1000");
-        //props.setProperty(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "30000");
+        props.setProperty(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "30000");
 
         return new KafkaConsumer<>(props);
     }

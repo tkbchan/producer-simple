@@ -26,12 +26,12 @@ public class Producer{
             }
             catch (ExecutionException e) {
                 System.out.println("Error in sending record");
-                //System.out.println(e);
+                System.out.println(e);
                 e.printStackTrace();
             }
             catch (InterruptedException e) {
                 System.out.println("Error in sending record");
-                //System.out.println(e);
+                System.out.println(e);
             }
         }
         producer.flush();
