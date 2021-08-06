@@ -19,6 +19,7 @@ public class PropConfigs {
         props.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, AppConfigs.bootstrapServers);
         props.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, IntegerSerializer.class.getName());
         props.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        props.setProperty(ProducerConfig.COMPRESSION_TYPE_CONFIG, "snappy");
         props.setProperty(ProducerConfig.ACKS_CONFIG, "all");
         props.setProperty(ProducerConfig.RETRIES_CONFIG, "3");
         props.setProperty(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, "true");
@@ -38,7 +39,6 @@ public class PropConfigs {
         props.setProperty(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "true");
         props.setProperty(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, "1000");
         props.setProperty(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "30000");
-
         return new KafkaConsumer<>(props);
     }
 
