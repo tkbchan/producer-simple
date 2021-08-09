@@ -42,7 +42,6 @@ public class Consumer{
 
             }
         } catch (WakeupException e) {
-            // Ignore exception if closing
             throw e;
         } catch (RuntimeException re) {
             logger.error("RuntimeException {}", re);
