@@ -20,6 +20,7 @@ public class PropConfigs {
         props.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, IntegerSerializer.class.getName());
         props.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         props.setProperty(ProducerConfig.COMPRESSION_TYPE_CONFIG, "snappy");
+        props.setProperty(ProducerConfig.LINGER_MS_CONFIG, "1");
         props.setProperty(ProducerConfig.ACKS_CONFIG, "all");
         props.setProperty(ProducerConfig.RETRIES_CONFIG, "3");
         props.setProperty(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, "true");
